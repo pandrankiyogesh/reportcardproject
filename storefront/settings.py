@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-k^4t(+nvo3_hjydv-e7_li2qik_fa^1!5ff=prv)0g^scto#5p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['reportcardprojectstudents.vercel.app']
 
