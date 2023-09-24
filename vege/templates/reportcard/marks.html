@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block start %}
+{{d1}}
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">MARKS CARD</a>
+        <a href="/log_out/"><button class="btn btn-primary">Logout</button></a>
+    </div>
+  </nav>
+    <div class="container mt-5">
+        <h3>MARKS: {{S_marks}}</h3>
+        <br>
+        <h3>RANK: {{finaldict}}</h3>
+        <br>
+            <a href="/send_mails/{{id}}/{{smail}}/{{femail}}"><button  class="btn btn-primary">SEND EMAIL</button></a>
+        <br>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Subjects</th>
+                <th scope="col">Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in query %}
+              <tr>
+                <td scope="row">{{forloop.counter}}</td>
+                <td>{{i.subject.subject_name}}</td>
+                <td>{{i.marks}}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% endblock %}

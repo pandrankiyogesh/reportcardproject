@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block start %}
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">MARKS CARD</a>
+        <a href="/log_out/"><button class="btn btn-primary">Logout</button></a>
+    </div>
+  </nav>
+<div class="container mt-5">
+    <form>
+      {% csrf_token %}
+    <div class="row p-2">
+                <div class="col-md-6"><input type="text" name="search"  class="form-control" placeholder="search in table with student name"></div>
+                <div class="col-md-6"><button type="submit" class="btn btn-success">Search</button></div>
+    </div>
+</form>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Roll.No</th>
+            <th scope="col">Student</th>
+            <th scope="col">Departmant</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for i in query %}
+          <tr>
+            <td scope="row">{{forloop.counter}}</td>
+            <td><a href="/marks_student/{{i.studentid}}">
+                {{i.studentid}}
+            </a>
+            </td>
+            <td>{{i.student_name}}</td>
+            <td>{{i.depatment.department}}</td>
+            <td>{{i.student_email}}</td>
+            <td>{{i.student_age}}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if query.has_previous %}
+            <a href="?page=1"><button style="color:white;background-color: green;">First</button></a>
+                <a href="?page={{ query.previous_page_number }}"><button style="color:white;background-color: green;">previous</button></a>
+            {% endif %}
+    
+            <span class="current" style="font-size: 25px;">
+                Page {{ query.number }} of {{ query.paginator.num_pages }}.
+            </span>
+            {% if query.has_next %}
+                <a href="?page={{ query.next_page_number }}"><button style="color:white;background-color: green;">Next</button></a>
+                <a href="?page={{ query.paginator.num_pages }}"><button style="color:white;background-color: green;">Last</button></a>
+            {% endif %}
+        </span>
+    </div>
+  </div>
+    
+
+{% endblock %}
